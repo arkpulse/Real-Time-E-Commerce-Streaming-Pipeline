@@ -321,20 +321,6 @@ Push → Lint (black/flake8/isort)
 
 ---
 
-## 💼 Resume Bullet Points
-
-> Copy-paste ready for your CV:
-
-- **Designed and built** an end-to-end real-time e-commerce streaming pipeline processing 50+ events/second across 4 Kinesis streams using Python, AWS Lambda, and PySpark on AWS Glue
-- **Implemented Medallion Architecture** (Bronze/Silver/Gold) on Amazon S3 with Parquet storage, partition pruning, and schema evolution using AWS Glue 4.0 and PySpark 3.3
-- **Engineered Snowflake star schema** with 3 fact tables and 4 dimension tables, Snowpipe auto-ingest, MERGE upsert procedures, and incremental ETL via scheduled Snowflake Tasks
-- **Built serverless DQ framework** with 15+ configurable checks per entity (schema, null, dedup, anomaly), publishing quality scores to CloudWatch with SNS alerting
-- **Deployed full infrastructure-as-code** using Terraform for Kinesis, S3, Lambda, Glue, DynamoDB, SNS, and IAM across dev/staging/prod environments
-- **Containerized and orchestrated** the producer service with Docker Compose, achieving configurable throughput of 10–500 events/second via multi-threaded workers
-- **Built CI/CD pipeline** with GitHub Actions covering lint, pytest (30+ tests with moto mocking), security scanning, Docker build, Lambda packaging, and blue/green deployment
-
----
-
 ## 🎤 Interview Q&A
 
 **Q: Why Kinesis over Kafka for this project?**
@@ -354,16 +340,6 @@ Push → Lint (black/flake8/isort)
 
 **Q: What is your data recovery strategy if a Glue job fails mid-run?**
 > Glue job bookmarks record the last successfully processed S3 prefix. On rerun, processing resumes from the checkpoint. Bronze data is immutable, so no source data is lost. The Silver/Gold writes use `mode=append` with partition paths, so partial writes are either completed or the partition is dropped and reprocessed.
-
----
-
-## 🌐 LinkedIn Project Description
-
-**Real-Time E-Commerce Streaming Data Pipeline | AWS · Snowflake · PySpark · Python**
-
-Built a production-grade end-to-end streaming data engineering system simulating a live e-commerce platform at 50+ events/second. The architecture spans 4 AWS Kinesis streams consumed by serverless Lambda functions that validate, deduplicate, and enrich events before landing them in a partitioned S3 data lake. AWS Glue PySpark jobs implement a full Medallion Architecture (Bronze → Silver → Gold), feeding a Snowflake star schema data warehouse with continuous Snowpipe auto-ingest and MERGE-based upserts. Analytical workloads run on both Athena (ad-hoc SQL on S3 Parquet) and Snowflake, with results visualized in a 6-page Power BI executive dashboard. Infrastructure is fully managed with Terraform, the producer is containerized with Docker, and the project ships with a GitHub Actions CI/CD pipeline covering lint, 30+ unit tests with moto AWS mocking, security scanning, and blue/green deployment.
-
-**Tech:** Python 3.11 · AWS Kinesis · AWS Lambda · Amazon S3 · AWS Glue · PySpark · Parquet · Snowflake · Athena · Power BI · Terraform · Docker · GitHub Actions
 
 ---
 
