@@ -1,0 +1,31 @@
+# =============================================================
+# Root requirements — dev / CI tooling
+# Install with: pip install -r requirements-dev.txt
+# =============================================================
+
+# AWS SDK
+boto3==1.34.69
+botocore==1.34.69
+
+# Event generation
+faker==24.2.0
+
+# Config
+python-dotenv==1.0.1
+
+# Testing
+pytest==8.1.1
+pytest-cov==5.0.0
+pytest-mock==3.14.0
+pytest-timeout==2.3.1
+moto[kinesis,s3,dynamodb,sns,glue]==5.0.3
+
+# Linting & formatting
+black==24.3.0
+flake8==7.0.0
+isort==5.13.2
+mypy==1.9.0
+bandit==1.7.8
+
+# Type stubs
+boto3-stubs[kinesis,s3,dynamodb,sns,lambda,glue,cloudwatch]==1.34.69
