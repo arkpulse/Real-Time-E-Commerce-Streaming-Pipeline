@@ -1,0 +1,33 @@
+# =============================================================
+# Prometheus Configuration
+# =============================================================
+
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+  external_labels:
+    environment: 'local'
+    project:     'ecommerce-streaming'
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+rule_files:
+  - "alert_rules.yml"
+
+scrape_configs:
+
+  # ── Producer metrics (if running locally) ──
+  - job_name: 'ecommerce-producer'
+    static_configs:
+      - targets: ['producer:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # ── LocalStack (optional) ──────────────────
+  - job_name: 'localstack'
+    static_configs:
+      - targets: ['localstack:4566']
+    scrape_interval: 30s
