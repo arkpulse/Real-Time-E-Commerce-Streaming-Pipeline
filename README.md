@@ -14,53 +14,7 @@ A **production-grade, cloud-native streaming data engineering system** that simu
 ## 🏗️ Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        DATA PRODUCER (Docker)                       │
-│   Python + Faker → Realistic E-Commerce Events (50+ events/sec)     │
-└──────────────────────────┬──────────────────────────────────────────┘
-                           │  JSON Payloads
-          ┌────────────────▼────────────────────┐
-          │         AWS KINESIS DATA STREAMS      │
-          │  orders │ payments │ clicks │ cart    │
-          └────────┬──────────┬──────────┬───────┘
-                   │          │          │
-        ┌──────────▼──┐  ┌────▼────┐  ┌─▼───────┐
-        │   Lambda    │  │ Lambda  │  │ Lambda  │
-        │  (Orders)   │  │ (Pay.)  │  │ (Click) │
-        └──────┬──────┘  └────┬────┘  └────┬────┘
-               │ Validate      │ Fraud       │ Schema
-               │ Dedupe        │ Check       │ Enrich
-               │ Enrich        │             │
-               └──────────┬────┘─────────────┘
-                           │
-          ┌────────────────▼────────────────────┐
-          │           AMAZON S3 (Data Lake)      │
-          │  ┌─────────┐ ┌────────┐ ┌────────┐  │
-          │  │ BRONZE  │ │SILVER  │ │  GOLD  │  │
-          │  │  Raw    │ │Cleaned │ │  KPIs  │  │
-          │  │  JSON   │ │Parquet │ │Parquet │  │
-          │  └────┬────┘ └───┬────┘ └────┬───┘  │
-          └───────┼──────────┼───────────┼───────┘
-                  │          │           │
-          ┌───────▼──────────▼───────────▼──────┐
-          │           AWS GLUE (PySpark ETL)     │
-          │  Bronze→Silver  │  Silver→Gold       │
-          │  Dedupe/Clean   │  KPIs/Aggs         │
-          └────────────────┬─────────────────────┘
-                           │
-               ┌───────────┴───────────┐
-               │                       │
-    ┌──────────▼──────────┐  ┌────────▼────────┐
-    │       ATHENA         │  │    SNOWFLAKE     │
-    │  Ad-hoc S3 queries   │  │  Star Schema DW  │
-    │  Conversion/Funnel   │  │  Fact+Dim Tables │
-    └──────────────────────┘  └────────┬─────────┘
-                                        │
-                             ┌──────────▼──────────┐
-                             │       POWER BI        │
-                             │  6 Dashboard Pages    │
-                             │  Real-Time Metrics    │
-                             └──────────────────────┘
+!(img/ARCHITECTURE E-Commerce.png)
 ```
 
 ---
