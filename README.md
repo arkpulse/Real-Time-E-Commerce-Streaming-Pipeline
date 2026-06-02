@@ -13,9 +13,7 @@ A **production-grade, cloud-native streaming data engineering system** that simu
 
 ## 🏗️ Architecture
 
-```
 !(img/ARCHITECTURE E-Commerce.png)
-```
 
 ---
 
